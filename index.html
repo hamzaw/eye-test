@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Eyesight Test</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="test-screen">
+            <div id="character" class="character"></div>
+            <div class="buttons">
+                <button id="next-btn">Next Character</button>
+                <button id="cant-see-btn">I Can't See</button>
+                <button id="restart-btn">Restart</button>
+            </div>
+        </div>
+        
+        <div id="results-screen" class="hidden">
+            <h2>Your Result</h2>
+            <p>You identified <span id="current-score">0</span> characters.</p>
+            <button id="view-scoreboard-btn">View Scoreboard</button>
+            <button id="test-again-btn">Test Again</button>
+        </div>
+        
+        <div id="scoreboard-screen" class="hidden">
+            <h2>Scoreboard</h2>
+            <div id="scoreboard-list"></div>
+            <button id="back-to-results-btn">Back to Results</button>
+            <button id="clear-scores-btn">Clear All Scores</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
