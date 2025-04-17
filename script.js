@@ -5,6 +5,7 @@ const scoreboardScreen = document.getElementById('scoreboard-screen');
 const characterEl = document.getElementById('character');
 const currentScoreEl = document.getElementById('current-score');
 const scoreboardListEl = document.getElementById('scoreboard-list');
+const zoomBtn = document.getElementById('zoom-btn');
 
 // Buttons
 const nextBtn = document.getElementById('next-btn');
@@ -56,6 +57,11 @@ function displayChar() {
     const char = generateRandomChar();
     characterEl.textContent = char;
     characterEl.style.fontSize = `${currentFontSize}px`;
+    
+    // When displaying a new character, reset zoom if it was on
+    if (characterEl.classList.contains('zoomed')) {
+        toggleZoom(false);
+    }
 }
 
 function decreaseFontSize() {
@@ -144,6 +150,28 @@ function addStrategySelector() {
     });
 }
 
+// Add zoom button functionality
+function toggleZoom(forceState) {
+    const isZoomed = characterEl.classList.contains('zoomed');
+    const newState = forceState !== undefined ? forceState : !isZoomed;
+    
+    if (newState) {
+        // Save current size before zooming
+        characterEl.dataset.originalSize = currentFontSize;
+        // Apply zoomed class which sets a fixed large size
+        characterEl.classList.add('zoomed');
+        zoomBtn.textContent = 'Hide Full Size';
+        zoomBtn.classList.add('active');
+    } else {
+        // Remove zoomed class
+        characterEl.classList.remove('zoomed');
+        // Restore the font size that was being tested
+        characterEl.style.fontSize = `${currentFontSize}px`;
+        zoomBtn.textContent = 'Show Full Size';
+        zoomBtn.classList.remove('active');
+    }
+}
+
 // Event Listeners
 nextBtn.addEventListener('click', () => {
     score++;
@@ -196,6 +224,8 @@ clearScoresBtn.addEventListener('click', () => {
         renderScoreboard();
     }
 });
+
+zoomBtn.addEventListener('click', () => toggleZoom());
 
 // Initialize
 addStrategySelector();
